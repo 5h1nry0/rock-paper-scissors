@@ -2,6 +2,8 @@ console.log("Hello World");
 let pScore = 0;
 let cScore = 0;
 
+console.log(playGame())
+
 function getComputerChoice() {
 //function to get random rock, paper or scissors output
     let random = Math.floor(Math.random() * 3) + 1;
