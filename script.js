@@ -2,8 +2,7 @@ console.log("Hello World");
 let pScore = 0;
 let cScore = 0;
 
-console.log(playGame())
-
+//message.textContent= finalMessage
 function getComputerChoice() {
 //function to get random rock, paper or scissors output
     let random = Math.floor(Math.random() * 3) + 1;
@@ -53,47 +52,49 @@ function playRound(playerSelection, computerSelection) {
     message
 }
 
-function playGame() {
-    let playerSelection = prompt("Type rock, paper or scissors");
-    let computerSelection = getComputerChoice();
-    let pSelect = playerSelection.toLowerCase();
-    let winner = playRound(playerSelection, computerSelection).match("Win");
-    let loser = playRound(playerSelection, computerSelection).match("Lose");
-    let tie = playRound(playerSelection, computerSelection).match("tie");
-    console.log("Player Score = " +pScore)
-    console.log("Computer Score = " +cScore)
 
-    if (winner=="Win") {        
-        pScore++;
-        console.log("You: " + pSelect + " Computer: " +computerSelection + "\n" + 
-        message + "\n" + 'Your points =' + pScore + ' Computer points =' +cScore);
-        if (pScore>=3) {
-            return console.log("You win the game!") 
-        }
-        else { 
-        playGame()
-        }
-    }
-    else if (loser=="Lose") {
-        cScore++;
-        console.log("You: " + pSelect + " Computer: " +computerSelection + "\n" + 
-        message + "\n" + 'Your points =' + pScore + ' Computer points =' +cScore);
-        if (cScore>=3) {
-            return console.log("You lose the game!") 
-        }
-        else { 
-        playGame()
-        }
-    }
-    else if (tie=="tie") {
-        console.log("You: " + pSelect + " Computer: " +computerSelection + "\n" + 
-        message + "\n" + 'Your points =' + pScore + ' Computer points =' +cScore);
-        playGame()
-    }   
-    else {
-        playGame()
-    }
-    
-}
+let rock = document.querySelectorAll('button.rock')
+let paper = document.querySelectorAll('button.paper')
+let scissors = document.querySelectorAll('button.scissors')
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    let playerSelection = button.id
+    button.addEventListener('click', () => {
+        let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+        let pSelect = playerSelection.toLowerCase();
+        let winner = playRound(playerSelection, computerSelection).match("Win");
+        let loser = playRound(playerSelection, computerSelection).match("Lose");
+        let text = document.getElementById("text");
+        let winnerText = document.getElementById("winnerText");
 
-
+        if (winner == "Win") {  
+                
+            pScore++;
+            player.textContent= "Player Score = " +pScore;
+            computer.textContent= "Computer Score = " +cScore;
+            text.textContent = "You: " + pSelect + " Computer: " + computerSelection + "\n" + 
+                                  message;
+            if (pScore >= 3) {
+            winnerText.textContent ="You win the game!";
+            }
+        }   
+        else if (loser == "Lose") {
+          
+            cScore++;
+            player.textContent= "Player Score = " +pScore;
+            computer.textContent= "Computer Score = " +cScore;
+            text.textContent = "You: " + pSelect + " Computer: " + computerSelection + "\n" + 
+                                  message;
+            if (cScore >= 3) {
+                winnerText.textContent ="You lose the game!";
+            }
+        }
+        else {
+            player.textContent= "Player Score = " +pScore;
+            computer.textContent= "Computer Score = " +cScore;
+            text.textContent = "You: " + pSelect + " Computer: " + computerSelection + "\n" + 
+                                  message ;
+        }
+});
+});
